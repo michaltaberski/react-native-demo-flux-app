@@ -7,8 +7,11 @@ var {
   StyleSheet,
 } = React;
 
+var _ = require('lodash');
 var Card = require('./card');
 var Button = require('./button');
+
+var fixtures = require('../fixtures');
 
 var styles = StyleSheet.create({
   main: {
@@ -19,9 +22,12 @@ var styles = StyleSheet.create({
 class Main extends React.Component {
 
   render() {
+    console.log(fixtures);
+    var cards = _.map(fixtures, (cardData) => <Card {...cardData} />);
+
     return (
       <View style={styles.main}>
-        <Card/>
+        {cards}
         <View style={{
           flexDirection:'row',
         }}>

@@ -42,10 +42,11 @@ var styles = StyleSheet.create({
 
 class Card extends React.Component {
   render() {
+    console.log(this.props);
     return(
       <View style={styles.card}>
-        <Text style={styles.keyword}>compassion</Text>
-        <Text style={styles.answer}>współczucie</Text>
+        <Text style={styles.keyword}>{this.props.question}</Text>
+        <Text style={styles.answer}>{this.props.answer}</Text>
       </View>
     )
   }
