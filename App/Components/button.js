@@ -1,12 +1,12 @@
 'use strict';
 
 var React = require('react-native');
-var _ = require('lodash');
 
 var {
   View,
   Text,
   StyleSheet,
+  TouchableHighlight,
 } = React;
 
 var styles = {
@@ -28,9 +28,9 @@ class Button extends React.Component {
 
   render() {
     return(
-      <View style={_.extend(styles.button, this.props.style)}>
+      <TouchableHighlight style={[styles.button, this.props.style]} onPress={this.props.onPress} >
         <Text style={styles.label}>{this.props.label}</Text>
-      </View>
+      </TouchableHighlight>
     );
   }
 

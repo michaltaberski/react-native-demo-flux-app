@@ -19,6 +19,7 @@ var styles = StyleSheet.create({
     borderColor: '#bbb',
     borderRadius: 3,
     shadowColor: "#000000",
+    backgroundColor: '#fff',
     shadowOpacity: 0.2,
     shadowRadius: 2,
     shadowOffset: {
@@ -42,7 +43,6 @@ var styles = StyleSheet.create({
 
 class Card extends React.Component {
   render() {
-    console.log(this.props);
     return(
       <View style={styles.card}>
         <Text style={styles.keyword}>{this.props.question}</Text>

@@ -8,7 +8,7 @@ var {
   View,
   NavigatorIOS,
 } = React;
-var Main = require('./App/Components/main')
+var CardPage = require('./App/Components/card_page')
 
 var styles = StyleSheet.create({
   navigator: {
@@ -22,10 +22,7 @@ class FishkaNavigator extends React.Component {
     return (
       <NavigatorIOS
         style={styles.navigator}
-        initialRoute={{
-          component: Main,
-          title: "Fishka",
-        }}
+        initialRoute={CardPage}
       />
     );
   }

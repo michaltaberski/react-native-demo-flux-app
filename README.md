@@ -12,8 +12,8 @@ fidelity - wierność
 outputData = []
 rawRows = rawData.split(/\n/)
 for rawRow in rawRows
-  [en, pl] = rawRow.split(' - ')
-  outputData.push({en, pl})
+  [question, answer] = rawRow.sanswerit(' - ')
+  outputData.push({question, answer})
 
 console.log(JSON.stringify(outputData))
 ```
