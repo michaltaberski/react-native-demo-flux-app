@@ -22,7 +22,7 @@ gulp.task('mocha', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(['App/*.js', 'test/**'], ['mocha']);
+    gulp.watch(['App/**', 'test/**'], ['mocha']);
 });
 
 gulp.task('default', ['mocha']);

@@ -12,11 +12,16 @@ var Card = require('./card');
 var Button = require('./button');
 var SearchPage = require('./search_page');
 var engine = require('../Lib/engine');
+var fixtures = require('../fixtures');
 
 class CardPage extends React.Component {
 
   constructor(props) {
     super(props);
+    
+    // for now just static fixtures loading
+    engine.loadData(fixtures);
+
     this.state = {
       card: engine.getNextCard()
     };
