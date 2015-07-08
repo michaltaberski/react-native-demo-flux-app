@@ -47,6 +47,7 @@ class Card extends React.Component {
       <View style={styles.card}>
         <Text style={styles.keyword}>{this.props.question}</Text>
         <Text style={styles.answer}>{this.props.answer}</Text>
+        <Text style={styles.answer}>{this.props.id}</Text>
       </View>
     )
   }

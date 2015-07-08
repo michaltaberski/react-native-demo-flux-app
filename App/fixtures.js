@@ -1,6 +1,19 @@
 'use strict';
 
-module.exports = [
+var sample = [
+  {"question": "posterity", "answer": "potomkowie"},
+  {"question": "obsolete", "answer": "przestarzały"},
+  {"question": "desire", "answer": "pragnienie"},
+  {"question": "fidelity", "answer": "wierność"},
+  {"question": "dull (eg blade)", "answer": "tępe (eg ostrze)"},
+  {"question": "likelihood", "answer": "pradopodobieństwo"},
+  {"question": "obstacle", "answer": "przeszkoda/bariera"},
+  {"question": "principles", "answer": "zasady"},
+  {"question": "inflatable", "answer": "nadmuchiwany"},
+  {"question": "claim", "answer": "roszczenie"},  
+];
+
+var fixtures = [
   {"question": "posterity", "answer": "potomkowie"},
   {"question": "obsolete", "answer": "przestarzały"},
   {"question": "desire", "answer": "pragnienie"},
@@ -69,3 +82,5 @@ module.exports = [
   {"question": "obtain", "answer": "uzyskać"},
   {"question": "nail", "answer": "paznokieć (ale też gwóźdź i przybić)"}
 ];
+
+module.exports = sample;

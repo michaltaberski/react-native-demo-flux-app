@@ -11,30 +11,37 @@ var {
 var Card = require('./card');
 var Button = require('./button');
 var SearchPage = require('./search_page');
-
-var fixtures = require('../fixtures');
+var engine = require('../Lib/engine');
 
 class CardPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {currentCardId: 0};
+    this.state = {
+      card: engine.getNextCard()
+    };
+  }
+
+  getNextCard() {
+    this.setState({
+      card: engine.getNextCard()
+    });
   }
 
   onPressNo() {
-
+    engine.regressCurrentCard();
+    this.getNextCard();
   }
 
   onPressYes() {
-    var newCardId = this.state.currentCardId + 1;
-    if (fixtures.length > newCardId) this.setState({currentCardId: newCardId});
+    engine.progressCurrentCard();
+    this.getNextCard();
   }
 
   render() {
-    var {question, answer} = fixtures[this.state.currentCardId];
     return (
       <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
-        <Card {...{question, answer}} />
+        <Card {...this.state.card} />
         <View style={{
           flexDirection:'row',
         }}>
