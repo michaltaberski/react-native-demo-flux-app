@@ -14,15 +14,25 @@ class Engine {
     });
   }
 
-  getWeakGroup(){
+  getWeakGroup() {
     var groupedData = _.values(
       _.groupBy(this.data, 'score')
     );
-    // pick the grup with the lower results
-    return groupedData[0];
+
+    var weakestGroup = groupedData[0];
+
+    console.log('Really weak:', _.map(weakestGroup, (card) => card.question));
+    // if weakest group has only one record and we have more groups
+    if (weakestGroup.length === 1) {
+      var additionalCards = _.sample(this.data, 3);
+      console.log('Additional cards:', _.map(additionalCards, (card) => card.question));
+      weakestGroup = weakestGroup.concat(additionalCards);
+    }
+
+    return weakestGroup;
   }
 
-  getNextCard() {
+  shuffleNextCard() {
     // pick the grup with the lower results
     var weakGroup = this.getWeakGroup();
     // exclude current card from weak grup

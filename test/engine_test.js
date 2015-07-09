@@ -9,7 +9,7 @@ var fixtures = [
   {"question": "posterity", "answer": "potomkowie"},
   {"question": "obsolete", "answer": "przestarzały"},
   {"question": "desire", "answer": "pragnienie"},
-]
+];
 
 describe('Engine', () => {
 
@@ -31,26 +31,41 @@ describe('Engine', () => {
 
   it('should decrease weakGroup length if record is progressed', () => {
     engine.getWeakGroup().length.should.be.equal(3);
-    engine.getNextCard();
+    engine.shuffleNextCard();
     engine.progressCurrentCard();
     engine.getWeakGroup().length.should.be.equal(2);
   });
 
   it('should not change weakGroup length if record is regressed', () => {
     engine.getWeakGroup().length.should.be.equal(3);
-    engine.getNextCard();
+    engine.shuffleNextCard();
     engine.regressCurrentCard();
     engine.getWeakGroup().length.should.be.equal(3);
   });
 
   it('next record should never be the sames as the previous one', () => {
-    engine.getNextCard();
+    engine.shuffleNextCard();
     var currentCardId = engine.currentCard.id;
     _.times(10, () => {
-      var nextCard = engine.getNextCard();
+      var nextCard = engine.shuffleNextCard();
       engine.currentCard.id.should.not.be.equal(currentCardId);
       currentCardId = engine.currentCard.id;
     });
+  });
+
+  it('weak group should always have more then one card', () => {
+    _.times(fixtures.length, () => {
+      engine.shuffleNextCard();
+      engine.progressCurrentCard();
+    });
+
+    engine.shuffleNextCard()
+    engine.regressCurrentCard();
+    engine.getWeakGroup().length.should.be.above(1);
+
+    engine.shuffleNextCard()
+    engine.regressCurrentCard();
+    engine.getWeakGroup().length.should.be.above(1);
   });
 
 });
