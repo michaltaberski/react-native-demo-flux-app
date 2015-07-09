@@ -18,52 +18,81 @@ class CardPage extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     // for now just static fixtures loading
     engine.loadData(fixtures);
 
     this.state = {
-      card: engine.getNextCard()
+      card: engine.shuffleNextCard(),
+      showResult: false,
     };
   }
 
-  getNextCard() {
+  shuffleNextCard() {
     this.setState({
-      card: engine.getNextCard()
+      card: engine.shuffleNextCard(),
+      showResult: false,
     });
+  }
+
+  onPressShowResult() {
+    this.state.showResult = true;
+    this.setState(this.state);
   }
 
   onPressNo() {
     engine.regressCurrentCard();
-    this.getNextCard();
+    this.shuffleNextCard();
   }
 
   onPressYes() {
     engine.progressCurrentCard();
-    this.getNextCard();
+    this.shuffleNextCard();
   }
 
-  render() {
-    return (
-      <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
-        <Card {...this.state.card} />
-        <View style={{
-          flexDirection:'row',
-        }}>
+  getButtonsBar() {
+
+    var barStyles = {
+      flexDirection:'row',
+      marginLeft: 30,
+      marginRight: 30,
+    };
+
+    if (this.state.showResult) {
+      return (
+        <View style={barStyles}>
           <Button label='No' style={{
-              marginLeft: 30,
               marginRight: 30,
               backgroundColor: 'red',
             }}
             onPress={this.onPressNo.bind(this)}
           />
           <Button label='Yes' style={{
-              marginRight: 30,
               backgroundColor: '#7ED321',
             }}
             onPress={this.onPressYes.bind(this)}
           />
         </View>
+      );
+    } else {
+      return (
+        <View style={barStyles}>
+          <Button label='Show' style={{
+              backgroundColor: '#282C34',
+            }}
+            onPress={this.onPressShowResult.bind(this)}
+          />
+        </View>
+      );
+    }
+  }
+
+  render() {
+
+    return (
+      <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
+        <Card {...this.state.card} showResult={this.state.showResult} />
+        {this.getButtonsBar()}
       </View>
     );
   }
