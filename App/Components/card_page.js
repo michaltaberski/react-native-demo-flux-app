@@ -10,44 +10,49 @@ var {
 
 var Card = require('./card');
 var Button = require('./button');
-var SearchPage = require('./search_page');
+var DemoPage = require('./demo_page');
 var engine = require('../Lib/engine');
 var fixtures = require('../fixtures');
+
+var CardActions = require('../Actions/CardActions');
+var CardStore = require('../Stores/CardStore');
+
 
 class CardPage extends React.Component {
 
   constructor(props) {
     super(props);
-
-    // for now just static fixtures loading
-    engine.loadData(fixtures);
-
-    this.state = {
-      card: engine.shuffleNextCard(),
-      showResult: false,
-    };
+    this.state = CardStore.getState();
   }
 
-  shuffleNextCard() {
-    this.setState({
-      card: engine.shuffleNextCard(),
-      showResult: false,
-    });
+  componentDidMount(cardState) {
+    CardStore.listen(this.cardChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    CardStore.unlisten(this.cardChange.bind(this));
   }
 
   onPressShowResult() {
-    this.state.showResult = true;
-    this.setState(this.state);
+    CardActions.showCurrentCardResult();
+  }
+
+  cardChange(cardStoreState) {
+    this.setState(cardStoreState);
   }
 
   onPressNo() {
-    engine.regressCurrentCard();
-    this.shuffleNextCard();
+    CardActions.regressCurrentCard();
+    CardActions.shuffleNextCard();
   }
 
   onPressYes() {
-    engine.progressCurrentCard();
-    this.shuffleNextCard();
+    CardActions.progressCurrentCard();
+    CardActions.shuffleNextCard();
+  }
+
+  onPressDemo() {
+    this.props.navigator.push(DemoPage);
   }
 
   getButtonsBar() {
@@ -88,11 +93,31 @@ class CardPage extends React.Component {
   }
 
   render() {
-
+    console.log(this.state);
     return (
       <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
-        <Card {...this.state.card} showResult={this.state.showResult} />
+        <Card {...this.state.currentCard} showResult={this.state.showResult} />
         {this.getButtonsBar()}
+        <View style={{
+          flexDirection:'row',
+          marginLeft: 30,
+          marginRight: 30,
+        }}>
+        </View>
+        <View style={{
+            marginLeft: 30,
+            marginRgith: 30,
+            marginTop: 20,
+          }}>
+          {this.state.cards.map((card) => {
+            return (
+              <View style={{flexDirection: 'row', margin: 1}}>
+                <Text style={{color: '#666', flex: 1}}>Q: {card.question} </Text>
+                <Text style={{color: '#999', flex: 1}}>Score: {card.score}</Text>
+              </View>
+            );
+          })}
+        </View>
       </View>
     );
   }

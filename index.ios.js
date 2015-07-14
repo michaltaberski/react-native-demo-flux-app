@@ -8,7 +8,7 @@ var {
   View,
   NavigatorIOS,
 } = React;
-var CardPage = require('./App/Components/card_page')
+var CardPage = require('./App/Components/card_page');
 
 var styles = StyleSheet.create({
   navigator: {
