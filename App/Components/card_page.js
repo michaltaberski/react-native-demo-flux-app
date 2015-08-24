@@ -6,6 +6,7 @@ var {
   View,
   StyleSheet,
   AlertIOS,
+  Animated,
 } = React;
 
 var Card = require('./card');
@@ -94,6 +95,7 @@ class CardPage extends React.Component {
 
   render() {
     console.log(this.state);
+    console.log(Animated);
     return (
       <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
         <Card {...this.state.currentCard} showResult={this.state.showResult} />
@@ -106,12 +108,12 @@ class CardPage extends React.Component {
         </View>
         <View style={{
             marginLeft: 30,
-            marginRgith: 30,
+            marginRight: 30,
             marginTop: 20,
           }}>
           {this.state.cards.map((card) => {
             return (
-              <View style={{flexDirection: 'row', margin: 1}}>
+              <View key={card.id} style={{flexDirection: 'row', margin: 1}}>
                 <Text style={{color: '#666', flex: 1}}>Q: {card.question} </Text>
                 <Text style={{color: '#999', flex: 1}}>Score: {card.score}</Text>
               </View>
