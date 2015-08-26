@@ -94,7 +94,7 @@ class Square {
   render() {
     return (
       <AnimatedView
-        style={this.getStyle()}
+        style={[this.getStyle(), this.props.style]}
         {...this._panResponder.panHandlers}
       >
         <Text>This is just a block.</Text>
@@ -109,6 +109,7 @@ class Demo extends React.Component {
     return(
       <View style={styles.container} >
         <Square />
+        <Square style={{backgroundColor: 'blue'}}/>
       </View>
     );
   }
