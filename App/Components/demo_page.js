@@ -8,8 +8,8 @@ const {
   PanResponder,
 } = React;
 
-const SQUARE_DIMENSIONS = 200;
-
+const SQUARE_DIMENSIONS = 150;
+const SWIPE_THRESHOLD = 120;
 
 var styles = StyleSheet.create({
   square: {
@@ -37,7 +37,6 @@ class Square {
 
   componentWillMount() {
     // http://browniefed.com/blog/2015/08/15/react-native-animated-api-with-panresponder/
-
     this._panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true, //Tell iOS that we are allowing the movement
       onMoveShouldSetPanResponderCapture: () => true, // Same here, tell iOS that we allow dragging
@@ -52,15 +51,39 @@ class Square {
           dy: this.state.pan.y,
         }
       ]),
-      onPanResponderRelease: () => {
-        // this.state.pan.flattenOffset();
-        Animated.spring(this.state.pan, {
-          toValue: 0
-        }).start();
+      onPanResponderRelease: (e, {vx, vy}) => {
+        // it prevents problem if you swiple twice while
+        // it still has a friction effect
+        this.state.pan.flattenOffset();
+
+        var xMovedVal = this.state.pan.x._value;
+        if (Math.abs(xMovedVal) > 120) {
+
+          if (xMovedVal > 120) {
+            console.log('moved to the right');
+          } else if (xMovedVal < -120) {
+            console.log('moved to the left');
+          }
+
+          Animated.decay(this.state.pan.x, {
+            velocity: vx,
+            deceleration: 0.98,
+          }).start()
+
+          Animated.decay(this.state.pan.y, {
+            velocity: vy,
+            deceleration: 0.985,
+          }).start()
+
+        } else {
+          Animated.spring(this.state.pan, {
+            toValue: 0,
+            friction: 4,
+          }).start();
+        }
+
       }
     });
-
-    console.log('pan handlers', this._panResponder.panHandlers);
 
   }
 
