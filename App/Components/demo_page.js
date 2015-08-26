@@ -6,10 +6,6 @@ const {
   StyleSheet,
 } = React;
 
-const {
-  pannable,
-} = require('react-native-gesture-recognizers');
-
 var styles = StyleSheet.create({
   block: {
     width: 200,

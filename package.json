@@ -8,8 +8,7 @@
   "dependencies": {
     "alt": "^0.17.1",
     "lodash": "^3.10.0",
-    "react-native": "^0.10.0-rc",
-    "react-native-gesture-recognizers": "^0.2.3"
+    "react-native": "^0.9.0"
   },
   "devDependencies": {
     "babel": "^5.6.14",
