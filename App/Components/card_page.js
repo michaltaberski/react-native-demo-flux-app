@@ -94,8 +94,6 @@ class CardPage extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log(Animated);
     return (
       <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
         <Card {...this.state.currentCard} showResult={this.state.showResult} />
@@ -105,7 +103,18 @@ class CardPage extends React.Component {
           marginLeft: 30,
           marginRight: 30,
         }}>
+
+          <Button
+            label='Go to Demo'
+            onPress={this.onPressDemo.bind(this)}
+            style={{
+              backgroundColor: 'purple',
+              marginTop: 20,
+            }}
+          />
+
         </View>
+
         <View style={{
             marginLeft: 30,
             marginRight: 30,

@@ -16,7 +16,7 @@ var styles = StyleSheet.create({
     paddingTop: 40,
     paddingBottom: 40,
     borderWidth: 1,
-    borderColor: '#bbb',
+    borderColor: '#bbbbbb',
     borderRadius: 3,
     shadowColor: "#000000",
     backgroundColor: '#fff',
