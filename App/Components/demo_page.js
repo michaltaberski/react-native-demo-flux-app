@@ -151,7 +151,6 @@ class Square extends React.Component {
   }
 }
 
-
 class Demo extends React.Component {
 
   constructor() {
@@ -204,7 +203,5 @@ class Demo extends React.Component {
 
 }
 
-module.exports = {
-  component: Demo,
-  title: 'Demo page',
-};
+module.exports.title = 'Demo page';
+module.exports.Component = Demo;

@@ -6,4 +6,4 @@ var {
 } = React;
 
 var FishkaNavigator = require('./App/Components/fishka_navigator');
-AppRegistry.registerComponent('fishka', () => FishkaNavigator);
+AppRegistry.registerComponent('main', () => FishkaNavigator);

@@ -11,7 +11,7 @@ var {
 var styles = StyleSheet.create({
   card: {
     margin: 30,
-    marginTop: 90,
+    marginTop: 20,
     padding: 20,
     paddingTop: 40,
     paddingBottom: 40,

@@ -7,6 +7,7 @@ var {
   StyleSheet,
   AlertIOS,
   Animated,
+  ScrollView,
 } = React;
 
 var Card = require('./card');
@@ -52,10 +53,6 @@ class CardPage extends React.Component {
     CardActions.shuffleNextCard();
   }
 
-  onPressDemo() {
-    this.props.navigator.push(DemoPage);
-  }
-
   getButtonsBar() {
 
     var barStyles = {
@@ -95,7 +92,7 @@ class CardPage extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
+      <ScrollView style={{flex: 1, backgroundColor: '#FFFCA7'}}>
         <Card {...this.state.currentCard} showResult={this.state.showResult} />
         {this.getButtonsBar()}
         <View style={{
@@ -105,8 +102,10 @@ class CardPage extends React.Component {
         }}>
 
           <Button
-            label='Go to Demo'
-            onPress={this.onPressDemo.bind(this)}
+            label='Go Back'
+            onPress={() => {
+              this.props.navigator.pop()
+            }}
             style={{
               backgroundColor: 'purple',
               marginTop: 20,
@@ -129,13 +128,11 @@ class CardPage extends React.Component {
             );
           })}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 
 }
 
-module.exports = {
-  component: CardPage,
-  title: 'Fishka!',
-};
+module.exports.Component = CardPage;
+module.exports.title = 'Fishka';
