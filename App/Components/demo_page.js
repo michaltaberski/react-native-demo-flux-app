@@ -9,10 +9,12 @@ const {
   StyleSheet,
   Animated,
   PanResponder,
+  LayoutAnimation,
 } = React;
 
 const SQUARE_DIMENSION = 100;
 const SWIPE_THRESHOLD = 120;
+const SQUARE_COLORS = ['blue', 'orange', 'red', 'purple'];
 
 var styles = StyleSheet.create({
   square: {
@@ -37,14 +39,14 @@ class Square extends React.Component {
     // https://github.com/brentvatne/react-native-animated-demo-tinder
     this.state = {
       pan: new Animated.ValueXY(),
-      enter: new Animated.Value(0.5),
+      scale: new Animated.Value(0.5),
     }
 
   }
 
   componentDidMount() {
     Animated.spring(
-      this.state.enter,
+      this.state.scale,
       { toValue: 1, friction: 4 }
     ).start();
   }
@@ -78,15 +80,21 @@ class Square extends React.Component {
             console.log('moved to the left');
           }
 
-          Animated.decay(this.state.pan.x, {
-            velocity: vx,
-            deceleration: 0.98,
-          }).start()
+          Animated.parallel([
+            Animated.decay(this.state.pan.x, {
+              velocity: vx,
+              deceleration: 0.98,
+            }),
+            Animated.decay(this.state.pan.y, {
+              velocity: vy,
+              deceleration: 0.985,
+            }),
+            Animated.timing(this.state.scale, {
+              toValue: 0,
+            }),
+          ]).start();
 
-          Animated.decay(this.state.pan.y, {
-            velocity: vy,
-            deceleration: 0.985,
-          }).start()
+          this.props.onMovedAway(this.props.index);
 
         } else {
           Animated.spring(this.state.pan, {
@@ -112,7 +120,7 @@ class Square extends React.Component {
             translateY: this.state.pan.y
           },
           {
-            scale: this.state.enter
+            scale: this.state.scale
           },
           {
             rotate: this.state.pan.x.interpolate({
@@ -130,13 +138,14 @@ class Square extends React.Component {
       }
     ];
   }
+
   render() {
     return (
       <Animated.View
         style={[this.getStyle(), this.props.style]}
         {...this._panResponder.panHandlers}
       >
-        <Text>Test</Text>
+        <Text>INDEX {this.props.index}</Text>
       </Animated.View>
     );
   }
@@ -149,27 +158,43 @@ class Demo extends React.Component {
     super();
 
     this.state = {
-      squareCount: 1
+      squares: ['green'],
     };
 
   }
 
+  componentWillMount() {
+    // Animate creation
+    LayoutAnimation.spring();
+  }
+
   addSquare() {
+    LayoutAnimation.spring();
+
+    this.state.squares.push(_.sample(SQUARE_COLORS));
     this.setState({
-      squareCount: this.state.squareCount + 1,
+      squares: this.state.squares,
+    });
+
+  }
+
+  removeSqure(index) {
+    LayoutAnimation.spring();
+
+    this.state.squares.splice(index, 1);
+    this.setState({
+      squareCount: this.state.squares,
     });
   }
 
   render() {
     return(
       <View style={styles.container} >
-        {
-          _.times(this.state.squareCount, () => {
-            return (
-              <Square style={{backgroundColor: 'blue'}}/>
-            );
-          })
-        }
+        {_.map(this.state.squares, (color, key) => {
+          return (
+            <Square key={key} index={key} style={{backgroundColor: color}} onMovedAway={this.removeSqure.bind(this)}/>
+          );
+        })}
         <View>
           <Button onPress={this.addSquare.bind(this)} label='Add Square' style={{backgroundColor: 'red'}}/>
         </View>
