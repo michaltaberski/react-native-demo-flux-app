@@ -40,7 +40,7 @@ class Square extends React.Component {
     this.state = {
       pan: new Animated.ValueXY(),
       scale: new Animated.Value(0.5),
-    }
+    };
 
   }
 

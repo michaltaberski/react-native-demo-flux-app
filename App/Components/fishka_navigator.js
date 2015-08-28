@@ -11,6 +11,7 @@ const {
 
 var CardPage = require('./card_page');
 var DemoPage = require('./demo_page');
+var ConfApp = require('./ReactConfDemo/ConfApp');
 
 class NavButton extends React.Component {
   render() {
@@ -46,6 +47,13 @@ class HomeScene extends React.Component {
           text="Fishka Game"
         />
 
+        <NavButton
+          onPress={() => {
+            this.props.navigator.push({id: 'conf_app'});
+          }}
+          text="ConfApp"
+        />
+
       </View>
     );
   }
@@ -60,8 +68,8 @@ class FishkaNavigator extends React.Component {
         return <DemoPage.Component navigator={nav} />
       case 'fishka':
         return <CardPage.Component navigator={nav} />
-      // default:
-      //   return <CardPage.Component navigator={nav} />
+      case 'conf_app':
+        return <ConfApp navigator={nav} />
       default:
         return <HomeScene navigator={nav} />
     };
