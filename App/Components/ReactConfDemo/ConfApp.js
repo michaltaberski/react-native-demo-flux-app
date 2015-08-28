@@ -217,8 +217,7 @@ class AnimationExampleApp extends React.Component {
         <View style={styles.header}>
           <Text style={{fontSize: 23, fontWeight: 'bold'}}>Gratuitous Animations</Text>
         </View>
-        {/*  <View style={styles.grid} onLayout={(e) => this.setState({layout: e.nativeEvent.layout})}> */}
-        <View style={styles.grid} >
+        <View style={styles.grid} onLayout={(e) => this.setState({layout: e.nativeEvent.layout})}>
           {circles}
         </View>
       </View>
