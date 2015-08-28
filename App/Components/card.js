@@ -46,10 +46,12 @@ class Card extends React.Component {
         var xMovedVal = this.state.pan.x._value;
         if (Math.abs(xMovedVal) > 120) {
 
-          if (xMovedVal > 120) {
-            console.log('moved to the right');
-          } else if (xMovedVal < -120) {
-            console.log('moved to the left');
+          var cb = () => {
+            if (xMovedVal > 120) {
+              this.props.onMovedRight()
+            } else if (xMovedVal < -120) {
+              this.props.onMovedLeft()
+            }
           }
 
           Animated.parallel([
@@ -61,7 +63,15 @@ class Card extends React.Component {
               velocity: vy,
               deceleration: 0.985,
             }),
-          ]).start();
+          ]).start(() => {
+            
+            cb();
+
+            Animated.spring(this.state.pan, {
+              toValue: 0,
+              friction: 4,
+            }).start();
+          });
 
         } else {
           Animated.spring(this.state.pan, {

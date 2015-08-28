@@ -4,10 +4,7 @@ var React = require('react-native');
 var {
   Text,
   View,
-  StyleSheet,
-  AlertIOS,
   Animated,
-  ScrollView,
 } = React;
 
 var Card = require('./card');
@@ -90,6 +87,29 @@ class CardPage extends React.Component {
     }
   }
 
+  getAnimatedStyles() {
+    if (this.refs.currentCard) {
+      return {
+        transform: [
+          {
+            rotate: this.refs.currentCard.state.pan.x.interpolate({
+             inputRange: [-200, 0, 200],
+             outputRange: ['90deg', '0deg', '-30deg'],
+           })
+          },
+          {
+            scale: this.refs.currentCard.state.pan.y.interpolate({
+              inputRange: [-200, 0, 200],
+              outputRange: [2, 1, 2],              
+            }),
+          }
+        ],
+      }
+    } else {
+      return {}
+    }
+  }
+
   render() {
     return (
       <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
@@ -97,7 +117,9 @@ class CardPage extends React.Component {
           {...this.state.currentCard}
           showResult={this.state.showResult}
           onPress={this.showResult.bind(this)}
-          ref='currentCar'
+          onMovedRight={this.onPressYes.bind(this)}
+          onMovedLeft={this.onPressNo.bind(this)}
+          ref='currentCard'
         />
         {this.getButtonsBar()}
         <View style={{
@@ -105,16 +127,14 @@ class CardPage extends React.Component {
           marginLeft: 30,
           marginRight: 30,
         }}>
-          <Button
-            label='Go Back'
-            onPress={() => {
-              this.props.navigator.pop()
-            }}
-            style={{
-              backgroundColor: 'purple',
-              marginTop: 20,
-            }}
-          />
+
+        <Animated.View style={[{
+            backgroundColor: '#ff0',
+            padding: 10,
+          }, this.getAnimatedStyles()]}>
+          <Text>Test</Text>
+        </Animated.View>
+
         </View>
 
         <View style={{
