@@ -18,17 +18,12 @@ class Engine {
     var groupedData = _.values(
       _.groupBy(this.data, 'score')
     );
-
     var weakestGroup = groupedData[0];
-
-    console.log('Really weak:', _.map(weakestGroup, (card) => card.question));
     // if weakest group has only one record and we have more groups
     if (weakestGroup.length === 1) {
       var additionalCards = _.sample(this.data, 3);
-      console.log('Additional cards:', _.map(additionalCards, (card) => card.question));
       weakestGroup = weakestGroup.concat(additionalCards);
     }
-
     return weakestGroup;
   }
 
@@ -39,8 +34,6 @@ class Engine {
     if (this.currentCard) {
       weakGroup = _.filter(weakGroup, (cardData) => cardData.id !== this.currentCard.id);
     }
-
-    // console.log('Weak group:', weakGroup);
     this.currentCard = _.sample(weakGroup);
     return this.currentCard;
   }

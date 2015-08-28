@@ -35,7 +35,7 @@ class CardPage extends React.Component {
     CardStore.unlisten(this.cardChange.bind(this));
   }
 
-  onPressShowResult() {
+  showResult() {
     CardActions.showCurrentCardResult();
   }
 
@@ -83,7 +83,7 @@ class CardPage extends React.Component {
           <Button label='Show' style={{
               backgroundColor: '#282C34',
             }}
-            onPress={this.onPressShowResult.bind(this)}
+            onPress={this.showResult.bind(this)}
           />
         </View>
       );
@@ -92,15 +92,19 @@ class CardPage extends React.Component {
 
   render() {
     return (
-      <ScrollView style={{flex: 1, backgroundColor: '#FFFCA7'}}>
-        <Card {...this.state.currentCard} showResult={this.state.showResult} />
+      <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
+        <Card
+          {...this.state.currentCard}
+          showResult={this.state.showResult}
+          onPress={this.showResult.bind(this)}
+          ref='currentCar'
+        />
         {this.getButtonsBar()}
         <View style={{
           flexDirection:'row',
           marginLeft: 30,
           marginRight: 30,
         }}>
-
           <Button
             label='Go Back'
             onPress={() => {
@@ -111,7 +115,6 @@ class CardPage extends React.Component {
               marginTop: 20,
             }}
           />
-
         </View>
 
         <View style={{
@@ -128,7 +131,7 @@ class CardPage extends React.Component {
             );
           })}
         </View>
-      </ScrollView>
+      </View>
     );
   }
 

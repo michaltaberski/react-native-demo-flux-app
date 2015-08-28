@@ -71,6 +71,7 @@ class FishkaNavigator extends React.Component {
       case 'conf_app':
         return <ConfApp navigator={nav} />
       default:
+        return <CardPage.Component navigator={nav} />
         return <HomeScene navigator={nav} />
     };
 
