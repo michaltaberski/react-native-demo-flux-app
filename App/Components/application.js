@@ -1,23 +1,22 @@
-'use strict';
+const React = require('react-native');
+const SideMenu = require('react-native-side-menu');
 
-var React = require('react-native');
-var SideMenu = require('react-native-side-menu');
-
-var {
+const {
   View,
   Text,
 } = React;
 
-var CardPage = require('./card_page');
-var Menu = require('./menu');
+const CardPage = require('./card_page');
+const Menu = require('./menu');
 
 class Application extends React.Component {
 
   render() {
     return (
-      <SideMenu menu={
-        <Menu/>
-      } >
+      <SideMenu menu={<Menu navigator={navigator} />}
+        disableGestures={true}
+        touchToClose={true}
+      >
         <CardPage.Component />
       </SideMenu>
     );

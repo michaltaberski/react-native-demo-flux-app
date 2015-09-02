@@ -109,7 +109,7 @@ class Card extends React.Component {
     } else {
       answerPlaceholder = <Text style={[styles.answer, {
           color: '#ccc',
-          fontSize: '15',
+          fontSize: 15,
         }]}>Tap to see answer</Text>
     }
 

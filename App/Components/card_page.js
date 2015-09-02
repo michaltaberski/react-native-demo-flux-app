@@ -5,6 +5,7 @@ var {
   Text,
   View,
   Animated,
+  TouchableHighlight,
 } = React;
 
 var Card = require('./card');
@@ -85,29 +86,6 @@ class CardPage extends React.Component {
     }
   }
 
-  getAnimatedStyles() {
-    if (this.refs.currentCard) {
-      return {
-        transform: [
-          {
-            rotate: this.refs.currentCard.state.pan.x.interpolate({
-             inputRange: [-200, 0, 200],
-             outputRange: ['90deg', '0deg', '-30deg'],
-           })
-          },
-          {
-            scale: this.refs.currentCard.state.pan.y.interpolate({
-              inputRange: [-200, 0, 200],
-              outputRange: [2, 1, 2],
-            }),
-          }
-        ],
-      }
-    } else {
-      return {}
-    }
-  }
-
   render() {
     return (
       <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
@@ -125,13 +103,20 @@ class CardPage extends React.Component {
           marginLeft: 30,
           marginRight: 30,
         }}>
+          <TouchableHighlight onPress={() => {
+              this.props.menuActions.toggle();
+            }.bind(this)}>
+            <View style={{
+                flex: 1,
+                padding: 10,
+                backgroundColor: '#ccc'
+              }}>
+              <Text>
+                OPEN MENU
+              </Text>
+            </View>
 
-        <Animated.View style={[{
-            backgroundColor: '#ff0',
-            padding: 10,
-          }, this.getAnimatedStyles()]}>
-          <Text>Test</Text>
-        </Animated.View>
+          </TouchableHighlight>
 
         </View>
 
