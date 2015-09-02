@@ -62,7 +62,7 @@ class HomeScene extends React.Component {
 
 class FishkaNavigator extends React.Component {
 
-  getScene(route = {}, nav) {
+  renderScene(route = {}, nav) {
     switch (route.id) {
       case 'demo':
         return <DemoPage.Component navigator={nav} />
@@ -71,7 +71,6 @@ class FishkaNavigator extends React.Component {
       case 'conf_app':
         return <ConfApp navigator={nav} />
       default:
-        return <CardPage.Component navigator={nav} />
         return <HomeScene navigator={nav} />
     };
 
@@ -80,7 +79,7 @@ class FishkaNavigator extends React.Component {
   render() {
     return (
       <Navigator
-        renderScene={this.getScene}
+        renderScene={this.renderScene}
       />
     );
   }

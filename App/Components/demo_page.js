@@ -145,7 +145,7 @@ class Square extends React.Component {
         style={[this.getStyle(), this.props.style]}
         {...this._panResponder.panHandlers}
       >
-        <Text>INDEX {this.props.index}</Text>
+        <Text>{this.props.index}</Text>
       </Animated.View>
     );
   }
@@ -177,6 +177,10 @@ class Demo extends React.Component {
 
   }
 
+  animateBack() {
+    this.props.navigator.popToTop();
+  }
+
   removeSqure(index) {
     LayoutAnimation.spring();
 
@@ -196,6 +200,7 @@ class Demo extends React.Component {
         })}
         <View>
           <Button onPress={this.addSquare.bind(this)} label='Add Square' style={{backgroundColor: 'red'}}/>
+          <Button onPress={this.animateBack.bind(this)} label='Go back' style={{backgroundColor: 'yellow'}}/>
         </View>
       </View>
     );

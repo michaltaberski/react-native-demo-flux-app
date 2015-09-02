@@ -64,7 +64,7 @@ class Card extends React.Component {
               deceleration: 0.985,
             }),
           ]).start(() => {
-            
+
             cb();
 
             Animated.spring(this.state.pan, {
@@ -113,7 +113,7 @@ class Card extends React.Component {
         }]}>Tap to see answer</Text>
     }
 
-    return(
+    return (
       <Animated.View {...this._panResponder.panHandlers} style={panStyles} >
         <TouchableWithoutFeedback onPress={this.props.onPress}>
           <View style={styles.card} >
