@@ -9,7 +9,6 @@ var {
 
 var Card = require('./card');
 var Button = require('./button');
-var DemoPage = require('./demo_page');
 var engine = require('../Lib/engine');
 var fixtures = require('../fixtures');
 
@@ -100,7 +99,7 @@ class CardPage extends React.Component {
           {
             scale: this.refs.currentCard.state.pan.y.interpolate({
               inputRange: [-200, 0, 200],
-              outputRange: [2, 1, 2],              
+              outputRange: [2, 1, 2],
             }),
           }
         ],
