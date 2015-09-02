@@ -8,7 +8,8 @@
   "dependencies": {
     "alt": "^0.17.1",
     "lodash": "^3.10.0",
-    "react-native": "^0.09"
+    "react-native": "^0.09",
+    "react-native-side-menu": "^0.12.1"
   },
   "devDependencies": {
     "babel": "^5.6.14",

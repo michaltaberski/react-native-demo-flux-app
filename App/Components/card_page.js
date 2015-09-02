@@ -15,7 +15,6 @@ var fixtures = require('../fixtures');
 var CardActions = require('../Actions/CardActions');
 var CardStore = require('../Stores/CardStore');
 
-
 class CardPage extends React.Component {
 
   constructor(props) {

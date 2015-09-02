@@ -5,5 +5,5 @@ var {
   AppRegistry,
 } = React;
 
-var FishkaNavigator = require('./App/Components/fishka_navigator');
-AppRegistry.registerComponent('main', () => FishkaNavigator);
+var Application = require('./App/Components/application');
+AppRegistry.registerComponent('main', () => Application);
