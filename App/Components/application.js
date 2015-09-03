@@ -14,7 +14,6 @@ class Application extends React.Component {
   render() {
     return (
       <SideMenu menu={<Menu navigator={navigator} />}
-        disableGestures={true}
         touchToClose={true}
       >
         <CardPage.Component />
