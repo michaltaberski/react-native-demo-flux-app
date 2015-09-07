@@ -1,7 +1,7 @@
 var alt = require('../alt');
 var fixtures = require('../fixtures');
 var CardActions = require('../Actions/CardActions');
-var engine = require('../Lib/engine');
+var engine = require('../Lib/Engine');
 
 class CardStore {
 

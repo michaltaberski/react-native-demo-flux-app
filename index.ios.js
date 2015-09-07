@@ -5,5 +5,5 @@ var {
   AppRegistry,
 } = React;
 
-var Application = require('./App/Components/application');
+var Application = require('./App/Components/Application');
 AppRegistry.registerComponent('fishka', () => Application);

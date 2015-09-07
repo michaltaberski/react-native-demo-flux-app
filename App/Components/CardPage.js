@@ -8,9 +8,9 @@ var {
   TouchableHighlight,
 } = React;
 
-var Card = require('./card');
-var Button = require('./button');
-var engine = require('../Lib/engine');
+var Card = require('./Card');
+var Button = require('./Button');
+var engine = require('../Lib/Engine');
 var fixtures = require('../fixtures');
 
 var CardActions = require('../Actions/CardActions');

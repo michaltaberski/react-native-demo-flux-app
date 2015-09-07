@@ -1,13 +1,13 @@
 const React = require('react-native');
-const SideMenu = require('react-native-side-menu');
+const SideMenu = require('./SideMenu');
 
 const {
   View,
   Text,
 } = React;
 
-const CardPage = require('./card_page');
-const Menu = require('./menu');
+const CardPage = require('./CardPage');
+const Menu = require('./Menu');
 
 class Application extends React.Component {
 

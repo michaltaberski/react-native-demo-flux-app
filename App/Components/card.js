@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var PanController = require('../Lib/PanController');
 
 var {
   View,
@@ -23,7 +24,14 @@ class Card extends React.Component {
   componentWillMount() {
     this._panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true, //Tell iOS that we are allowing the movement
-      onMoveShouldSetPanResponderCapture: () => true, // Same here, tell iOS that we allow dragging
+      onMoveShouldSetPanResponderCapture: () => {
+
+        if (!PanController.setResponderOwner('card')) {
+          return false;
+        };
+        return true;
+
+      },
       onPanResponderGrant: (e, gestureState) => {
         this.state.pan.setOffset({
           x: this.state.pan.x.getAnimatedValue(),
@@ -39,6 +47,10 @@ class Card extends React.Component {
         }
       ]),
       onPanResponderRelease: (e, {vx, vy}) => {
+
+        console.log('Reset Pan owner:', PanController.owner);
+        PanController.reset();
+
         // it prevents problem if you swiple twice while
         // it still has a friction effect
         this.state.pan.flattenOffset();
