@@ -15,6 +15,7 @@ class Application extends React.Component {
     return (
       <SideMenu menu={<Menu navigator={navigator} />}
         touchToClose={true}
+        openMenuOffset={180}
       >
         <CardPage.Component />
       </SideMenu>

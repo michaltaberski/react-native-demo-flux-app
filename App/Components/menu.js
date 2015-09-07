@@ -13,7 +13,9 @@ class Menu extends React.Component {
   render() {
     return (
       <View style={styles.menu}>
-        <Text>Menu</Text>
+        <View style={{width: 180}}>
+          <Text style={{color: '#fff'}}>Menu</Text>
+        </View>
       </View>
     );
   }
@@ -22,8 +24,10 @@ class Menu extends React.Component {
 
 var styles = StyleSheet.create({
   menu: {
-    backgroundColor: '#eee',
+    backgroundColor: '#343C4A',
+    color: '#fff',
     justifyContent: 'center',
+    alignItems: 'center',
     flex: 1, // full height
   }
 });

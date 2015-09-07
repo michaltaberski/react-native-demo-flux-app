@@ -129,10 +129,6 @@ class SideMenu extends Component {
    * @return {Boolean}
    */
   handleMoveShouldSetPanResponder(e: Object, gestureState: Object) {
-
-    // console.log('SideMenu onMove PanController.isActive', PanController.isActive);
-    // console.log('SideMenu onMove value', value);
-
     if (this.gesturesAreEnabled()) {
 
       if (!PanController.setResponderOwner('sideMenu')) {
@@ -168,8 +164,6 @@ class SideMenu extends Component {
    * @return {Void}
    */
   handlePanResponderEnd(e: Object, gestureState: Object) {
-
-    console.log('Reset Pan owner:', PanController.owner);
     PanController.reset();
 
     const currentLeft = this.state.left.__getValue();

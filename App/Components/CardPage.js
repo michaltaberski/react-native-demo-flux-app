@@ -67,7 +67,7 @@ class CardPage extends React.Component {
             onPress={this.onPressNo.bind(this)}
           />
           <Button label='Yes' style={{
-              backgroundColor: '#7ED321',
+              backgroundColor: '#4CD764',
             }}
             onPress={this.onPressYes.bind(this)}
           />
@@ -86,40 +86,9 @@ class CardPage extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <View style={{flex: 1, backgroundColor: '#FFFCA7'}}>
-        <Card
-          {...this.state.currentCard}
-          showResult={this.state.showResult}
-          onPress={this.showResult.bind(this)}
-          onMovedRight={this.onPressYes.bind(this)}
-          onMovedLeft={this.onPressNo.bind(this)}
-          ref='currentCard'
-        />
-        {this.getButtonsBar()}
-        <View style={{
-          flexDirection:'row',
-          marginLeft: 30,
-          marginRight: 30,
-        }}>
-          <TouchableHighlight onPress={() => {
-              this.props.menuActions.toggle();
-            }.bind(this)}>
-            <View style={{
-                flex: 1,
-                padding: 10,
-                backgroundColor: '#ccc'
-              }}>
-              <Text>
-                OPEN MENU
-              </Text>
-            </View>
-
-          </TouchableHighlight>
-
-        </View>
-
+  getStatisticsBlock(show = true) {
+    if (show) {
+      return (
         <View style={{
             marginLeft: 30,
             marginRight: 30,
@@ -134,6 +103,36 @@ class CardPage extends React.Component {
             );
           })}
         </View>
+      );
+    }
+    return null;
+  }
+
+  render() {
+    return (
+      <View style={{
+          flex: 1,
+          backgroundColor: '#fff',
+          shadowColor: "#000",
+          shadowOpacity: 0.5,
+          shadowRadius: 10,
+          shadowOffset: {
+            height: 10,
+            width: 0
+          },
+        }}>
+        <Card
+          {...this.state.currentCard}
+          showResult={this.state.showResult}
+          onPress={this.showResult.bind(this)}
+          onMovedRight={this.onPressYes.bind(this)}
+          onMovedLeft={this.onPressNo.bind(this)}
+          ref='currentCard'
+        />
+        {this.getButtonsBar()}
+
+        {this.getStatisticsBlock(false)}
+
       </View>
     );
   }

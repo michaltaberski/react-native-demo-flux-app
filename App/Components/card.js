@@ -145,17 +145,10 @@ var styles = StyleSheet.create({
     padding: 20,
     paddingTop: 40,
     paddingBottom: 40,
-    borderWidth: 1,
-    borderColor: '#bbb',
+    borderWidth: 2,
+    borderColor: '#3498DB',
     borderRadius: 3,
-    shadowColor: "#000",
     backgroundColor: '#fff',
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 1,
-      width: 0
-    },
     justifyContent: 'center',
 
   },

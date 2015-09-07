@@ -14,7 +14,6 @@ class PanController {
       return false
     } else {
       this.owner = newOwner;
-      console.log('newOwner is ', newOwner);
       return true;
     }
   }
